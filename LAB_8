@@ -1,0 +1,37 @@
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+messages = [
+    "win a free prize now",
+    "claim your free reward",
+    "congratulations you won cash",
+    "get a special offer today",
+    "please attend the meeting tomorrow",
+    "can we meet after class",
+    "Your assignment is due friday",
+    "Please send me the notes"
+]
+lables = [
+    "spam",
+    "spam",
+    "spam",
+    "spam",
+    "NOt spam",
+    "NOt spam",
+    "NOt spam",
+    "NOt spam",
+]
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(messages)
+print("Vocabulay:", vectorizer.vocabulary_)
+print( X.toarray())
+model = MultinomialNB()
+model.fit(X, lables)
+new_message = ["Win cash today"]
+new_X = vectorizer.transform(new_message)
+Prediction = model.predict(new_X)
+print("Message:",new_message[0])
+print("Prediction: ",prediction[0])
+user_message = input("Enter a mesage: ")
+user_X = vectorizer.transform([user_message])
+prediction = model.predict(user_X)
+print("Prediction: ",prediction[0])
